@@ -1,0 +1,59 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JsConsole.Net</title>
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/cover.css" rel="stylesheet" />
+    <script>
+        var funcThrow = function () {
+            //error !!
+            balert("ddd");
+        }
+    </script>
+
+</head>
+<body ng-app="app" ng-controller="mainController">
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                <div class="inner cover">
+                    <p class="lead">
+                        <a href="#" class="btn btn-lg btn-success" ng-click="browserUtil.log('hello')">
+                            Say Hello server !
+                        </a>
+                        <a href="#" class="btn btn-lg btn-success" ng-click="browserUtil.log('Goodbye')">
+                            Say Goodbye server !
+                        </a>
+                    </p>
+                    <p class="lead">
+                        <a href="#" class="btn btn-lg btn-danger" ng-click="execFunction('funcThrow()')">
+                            Throw exception !
+                        </a>
+                    </p>
+                    <div class="log-container pre-scrollable">
+                        <ul>
+                            <li class="log-repeat" ng-repeat="log in logs track by $index">
+                                {{$index + 1}} : {{log}}.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- beginJs  ================================================== -->
+    <script src="../Scripts/jquery-2.1.1.min.js"></script>
+    <script src="../Scripts/jquery.signalR-2.1.2.min.js"></script>
+    <script src="../Scripts/angular.min.js"></script>
+    <script src="../Scripts/angular-route.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="../Scripts/angular-signalr-hub.js"></script>
+    <script src="../Scripts/underscore-min.js"></script>
+    <script src="../Scripts/app.js"></script>
+    <!-- endJs     ================================================== -->
+</body>
+</html>

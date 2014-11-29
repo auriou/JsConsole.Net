@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:JsConsole.Controls">
+    <Style x:Key="IconHeaderStyle" TargetType="controls:IconHeader">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:IconHeader}">
+                    <Border Background="{DynamicResource ColorWhite4}"
+                            BorderBrush="{DynamicResource ColorBlack2}"
+                            BorderThickness="0,1,0,1">
+                        <StackPanel Orientation="Horizontal">
+                            <ContentControl Height="16"
+                                            Margin="4"
+                                            ContentTemplate="{TemplateBinding IconeTemplate}"
+                                            Foreground="Black" />
+                            <TextBlock Margin="2"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       FontSize="12"
+                                       Foreground="Black"
+                                       Text="{TemplateBinding Content}" />
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

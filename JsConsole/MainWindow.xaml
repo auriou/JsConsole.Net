@@ -1,0 +1,235 @@
+﻿<controls:MetroWindow x:Class="JsConsole.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+                      xmlns:behaviors="clr-namespace:JsConsole.Behaviors"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:controls1="clr-namespace:JsConsole.Controls"
+                      Title="JsConsole.Net"
+                      Width="900"
+                      Height="500"
+                      MinWidth="600"
+                      MinHeight="300"
+                      BorderBrush="{DynamicResource AccentColorBrush}"
+                      BorderThickness="2"
+                      EnableDWMDropShadow="True"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      Icon="Resources/JavaScript.png"
+                      ResizeMode="CanResizeWithGrip"
+                      ShowIconOnTitleBar="True"
+                      ShowTitleBar="True"
+                      WindowStartupLocation="CenterScreen"
+                      WindowTransitionsEnabled="False">
+    <Window.DataContext>
+        <Binding Path="Main" Source="{StaticResource Locator}" />
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="F5" Command="{Binding ExecScriptCommand}" />
+    </Window.InputBindings>
+
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Label Margin="10,0"
+                   VerticalAlignment="Bottom"
+                   Content="{Binding Version}"
+                   Foreground="White"
+                   Opacity=".55" />
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="{StaticResource ColorBlack3}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Margin="0,5" Orientation="Horizontal">
+                    <Label HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Port : "
+                           Foreground="{StaticResource ColorWhite1}"
+                           Opacity=".55"
+                           ToolTip="Restart application if ypu change port" />
+                    <TextBox Width="40"
+                             Height="21"
+                             MinHeight="21"
+                             VerticalAlignment="Center"
+                             Text="{Binding Port,
+                                            Mode=TwoWay,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                             TextAlignment="Right"
+                             ToolTip="Restart application if ypu change port" />
+
+                    <controls1:IconButton Height="25"
+                                          Margin="2,0"
+                                          VerticalAlignment="Center"
+                                          Command="{Binding StartOrStopWebServerCommand}"
+                                          Content="{Binding Path=IsRunning,
+                                                            Converter={StaticResource BoolToStringConverter},
+                                                            ConverterParameter=Stop-Start}"
+                                          IconeTemplate="{StaticResource Icone-Start}"
+                                          IsEnabled="True"
+                                          Padding="0,1,0,0" />
+                    <controls1:IconButton Height="25"
+                                          Margin="2,0"
+                                          VerticalAlignment="Center"
+                                          Command="{Binding ExecScriptCommand}"
+                                          Content="Execute js (F5)"
+                                          IconeTemplate="{StaticResource Icone-Play}"
+                                          IsEnabled="True"
+                                          Padding="0,1,0,0" />
+                    <controls1:IconButton x:Name="ClearJsButton"
+                                          Height="25"
+                                          Margin="2,0"
+                                          VerticalAlignment="Center"
+                                          Click="ClearJsButton_OnClick"
+                                          Content="Clear js"
+                                          IconeTemplate="{StaticResource Icone-Cleaner}"
+                                          IsEnabled="True"
+                                          Padding="0,1,0,0" />
+                    <Label Margin="0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Snippet :"
+                           Foreground="{StaticResource ColorWhite1}"
+                           Opacity=".55" />
+                    <ComboBox Width="100"
+                              Height="21"
+                              MinHeight="21"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Center"
+                              ItemsSource="{Binding Snippets}"
+                              SelectedValue="{Binding SelectedSnippet,
+                                                      Mode=TwoWay}">
+                        <!--
+                            <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                            <TextBlock Text="{Binding Path=.}" />
+                            </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        -->
+                    </ComboBox>
+                    <controls1:IconButton x:Name="InsertJsButton"
+                                          Height="25"
+                                          Margin="2,0"
+                                          VerticalAlignment="Center"
+                                          Command="{Binding InsertSnippetCommand}"
+                                          Content="Insert"
+                                          IconeTemplate="{StaticResource Icone-FlecheGauche}"
+                                          IsEnabled="True"
+                                          Padding="0,1,0,0" />
+                    <controls1:IconButton Height="25"
+                                          Margin="2,0"
+                                          VerticalAlignment="Center"
+                                          Command="{Binding OpenSnippetCommand}"
+                                          IconeTemplate="{StaticResource Icone-Folder}"
+                                          IsEnabled="True"
+                                          Padding="0,1,0,0"
+                                          ToolTip="Open snippet folder" />
+
+                </StackPanel>
+
+                <StackPanel Grid.Column="1"
+                            Margin="0,5"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                    <controls1:IconButton x:Name="ClearLogButton"
+                                          Height="25"
+                                          Margin="2,0"
+                                          VerticalAlignment="Center"
+                                          Click="ClearLogButton_OnClick"
+                                          Content="Clear logs"
+                                          IconeTemplate="{StaticResource Icone-Clean}"
+                                          IsEnabled="True"
+                                          Padding="0,1,0,0" />
+                    <CheckBox Margin="2,0,5,0"
+                              Content="Sending script to all clients"
+                              Foreground="{StaticResource ColorWhite1}"
+                              IsChecked="{Binding SendToAll}"
+                              ToolTip="If not checked the script is sending only client selected" />
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*" />
+                <ColumnDefinition Width="0.4*" />
+            </Grid.ColumnDefinitions>
+            <controls1:Widget Title="Console javascript"
+                              Margin="2,2,5,2"
+                              IconeTemplate="{DynamicResource Icone-Web}">
+                <!--  Document="{Binding Path=ScriptDocument}"  -->
+                <avalonEdit:TextEditor x:Name="JsEditor"
+                                       FontFamily="Consolas"
+                                       FontSize="10pt"
+                                       HorizontalScrollBarVisibility="Auto"
+                                       ShowLineNumbers="True"
+                                       SyntaxHighlighting="JavaScript"
+                                       VerticalScrollBarVisibility="Auto" />
+            </controls1:Widget>
+            <GridSplitter Grid.Column="0" Width="5" />
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <controls1:Widget Title="Clients connected" IconeTemplate="{DynamicResource Icone-Payments}">
+                    <ListView x:Name="ClientListBox"
+                              MinHeight="80"
+                              ItemsSource="{Binding Connections}"
+                              SelectedItem="{Binding SelectedConnection}"
+                              Style="{DynamicResource ListViewGridStyle}">
+                        <ListView.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Text}" />
+                            </Style>
+                        </ListView.Resources>
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="true">
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Ip}"
+                                                Header="Ip"
+                                                behaviors:GridViewBehavior.SortPropertyName="Ip"
+                                                behaviors:GridViewColumnResize.Width="50" />
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Referer}"
+                                                Header="Url"
+                                                behaviors:GridViewBehavior.SortPropertyName="Referer"
+                                                behaviors:GridViewColumnResize.Width="80" />
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=UserAgent}"
+                                                Header="Signature"
+                                                behaviors:GridViewBehavior.SortPropertyName="UserAgent"
+                                                behaviors:GridViewColumnResize.Width="*" />
+                                <GridViewColumn Width="100"
+                                                DisplayMemberBinding="{Binding Path=Id}"
+                                                Header="Id"
+                                                behaviors:GridViewColumnResize.Width="100" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </controls1:Widget>
+                <GridSplitter Grid.Row="1"
+                              Height="5"
+                              HorizontalAlignment="Stretch"
+                              ResizeDirection="Rows" />
+                <controls1:Widget Title="Log clients"
+                                  Grid.Row="2"
+                                  IconeTemplate="{DynamicResource Icone-Check}">
+                    <!--  Document="{Binding Path=LogDocument}"  -->
+                    <avalonEdit:TextEditor x:Name="LogEditor"
+                                           Margin="1"
+                                           FontFamily="Consolas"
+                                           FontSize="10pt"
+                                           HorizontalScrollBarVisibility="Auto"
+                                           ShowLineNumbers="True"
+                                           VerticalScrollBarVisibility="Auto" />
+                </controls1:Widget>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</controls:MetroWindow>

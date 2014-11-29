@@ -1,0 +1,47 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color x:Key="RealColorBlack1">#FF34383C</Color>
+    <Color x:Key="RealColorBlack2">#FF3C4044</Color>
+    <Color x:Key="RealColorBlack3">#FF5C636C</Color>
+    <Color x:Key="RealColorBlack1Transparent">#605C636C</Color>
+    <Color x:Key="RealColorTheme1">#FF3DBFD9</Color>
+    <Color x:Key="RealColorTheme1Dark">#FF007ACC</Color>
+    <Color x:Key="RealColorTheme2">#FF91C46B</Color>
+    <Color x:Key="RealColorTheme3">#FFF15822</Color>
+    <Color x:Key="RealColorWhite1">White</Color>
+    <Color x:Key="RealColorWhite2">#FFF5F6F6</Color>
+    <Color x:Key="RealColorWhite3">#FFECECED</Color>
+    <Color x:Key="RealColorWhite4">#FFE5E5E5</Color>
+    <Color x:Key="RealColorWhite5">#FFADADAD</Color>
+    <Color x:Key="RealColorWhite1Transparent">#80FFFFFF</Color>
+
+    <SolidColorBrush x:Key="ColorBlack1" Color="{DynamicResource RealColorBlack1}" />
+    <SolidColorBrush x:Key="ColorBlack2" Color="{DynamicResource RealColorBlack2}" />
+    <SolidColorBrush x:Key="ColorBlack3" Color="{DynamicResource RealColorBlack3}" />
+    <SolidColorBrush x:Key="ColorBlack1Transparent" Color="{DynamicResource RealColorBlack1Transparent}" />
+    <SolidColorBrush x:Key="ColorTheme1" Color="{DynamicResource RealColorTheme1}" />
+    <SolidColorBrush x:Key="ColorTheme1Dark" Color="{DynamicResource RealColorTheme1Dark}" />
+    <SolidColorBrush x:Key="ColorTheme2" Color="{DynamicResource RealColorTheme2}" />
+    <SolidColorBrush x:Key="ColorTheme3" Color="{DynamicResource RealColorTheme3}" />
+    <SolidColorBrush x:Key="ColorWhite1" Color="{DynamicResource RealColorWhite1}" />
+    <SolidColorBrush x:Key="ColorWhite1Transparent" Color="{DynamicResource RealColorWhite1Transparent}" />
+    <SolidColorBrush x:Key="ColorWhite2" Color="{DynamicResource RealColorWhite2}" />
+    <SolidColorBrush x:Key="ColorWhite3" Color="{DynamicResource RealColorWhite3}" />
+    <SolidColorBrush x:Key="ColorWhite4" Color="{DynamicResource RealColorWhite4}" />
+    <SolidColorBrush x:Key="ColorWhite5" Color="{DynamicResource RealColorWhite5}" />
+
+
+
+
+    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF7F7F7F" />
+    <!--  Les entrées du dictionnaire de ressources sont définies ici.  -->
+    <!--
+        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+        
+        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"
+        Color="Black" />
+        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"
+        Color="Transparent" />
+        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"
+        Color="Black" />
+    -->
+</ResourceDictionary>
